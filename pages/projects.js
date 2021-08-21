@@ -3,7 +3,25 @@ import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
 import { PageSEO } from '@/components/SEO'
 
-export default function Projects() {
+export async function getStaticProps() {
+  const data = await (
+    await fetch(
+      'https://api.github.com/search/repositories?q=user:laymonage&sort=stars&order=desc&per_page=6'
+    )
+  ).json()
+  console.log(data)
+
+  return {
+    props: {
+      data,
+    },
+  }
+}
+
+export default function Projects({ data }) {
+  const numOfProjects = data.total_count
+  const items = data.items
+
   return (
     <>
       <PageSEO title={`Projects - ${siteMetadata.author}`} description={siteMetadata.description} />
@@ -18,13 +36,13 @@ export default function Projects() {
         </div>
         <div className="container py-12">
           <div className="flex flex-wrap -m-4">
-            {projectsData.map((d) => (
+            {items.map((d) => (
               <Card
-                key={d.title}
-                title={d.title}
+                key={d.name}
+                title={d.name}
                 description={d.description}
-                imgSrc={d.imgSrc}
-                href={d.href}
+                imgSrc="/project.png"
+                href={d.html_url}
               />
             ))}
           </div>
