@@ -1,11 +1,9 @@
 const projectsData = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
+    title: 'giscus',
+    description: `A comments widget built on GitHub Discussions`,
     imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    href: 'https://giscus.app',
   },
   {
     title: 'The Time Machine',
